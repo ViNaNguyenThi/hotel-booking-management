@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+html {
+    font-family: 'Playfair Display', serif; /* Font chính */
+}
+
+body {
+    background-color: #fdfeff; /* Màu nền nhẹ */
+    overflow-x: hidden; /* Ngăn cuộn ngang */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Chiều cao đầy đủ của viewport */
+    margin: 0; /* Bỏ margin mặc định */
+}
+
+.container {
+    display: flex; /* Sử dụng flex để tạo layout */
+    background-color: white; /* Màu nền cho form */
+    border-radius: 8px; /* Bo góc */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho form */
+    overflow: hidden; /* Ẩn phần vượt ra ngoài biên */
+    max-width: 800px; /* Độ rộng tối đa cho container */
+    width: 100%; /* Độ rộng 100% */
+}
+
+.image-container {
+  flex: 1; /* Chiếm không gian còn lại cho hình ảnh */
+  background-image: url("./assets/images/login.jpg"); /* Đường dẫn tới hình ảnh */
+  background-size: cover; /* Làm đầy container với hình ảnh */
+  background-position: center; /* Căn giữa hình ảnh */
+  height: 666px; /* Đảm bảo chiều cao của container */
+  width: 655px;
+  margin-right: 60px;
+  border-radius: 20px;
+}
+
+.image-container-signup {
+    flex: 1; /* Chiếm không gian còn lại cho hình ảnh */
+    background-image: url("./assets/images/signup.jpg"); /* Đường dẫn tới hình ảnh */
+    background-size: cover; /* Làm đầy container với hình ảnh */
+    background-position: center; /* Căn giữa hình ảnh */
+    height: 666px; /* Đảm bảo chiều cao của container */
+    width: 655px;
+    margin-left: 80px;
+    border-radius: 20px;
+  }
+
+.login-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.login-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Đảm bảo ảnh không bị biến dạng */
+}
+
+.form-container {
+    flex: 0 0 500px; /* Độ rộng cố định cho form */
+    padding: 40px; /* Padding cho form */
+}
+
+.login-form {
+    /* padding-left: 20px; */
+    /* width: 520px; */
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.login-form p {
+   font-size: 18px;
+   font-family: raleway;
+   color: #004168;
+   font-weight: 600;
+   margin-bottom: 10px;
+   padding-top: 15px;
+}
+
+h1 {
+    text-align: center; /* Căn giữa tiêu đề */
+    font-size: 36px; /* Kích thước chữ tiêu đề */
+    margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+    font-family: playfair display;
+    color: #004168;
+}
+
+.input-box,
+.password-box { /* Thêm class password-box */
+    width: 500px; /* Đặt độ rộng */
+    height: 60px; /* Đặt chiều cao */
+    font-size: 20px; /* Kích thước chữ */
+    padding-left: 16px; /* Padding cho input */
+    border: 3px solid #004168; /* Biên cho input */
+    border-radius: 10px; /* Bo góc cho input */
+    outline: none; /* Không hiển thị đường viền khi focus */
+    transition: border-color 0.3s; /* Hiệu ứng chuyển động khi focus */
+    box-sizing: border-box; /* Thêm thuộc tính này */
+}
+
+/* Áp dụng màu biên khi focus */
+.input-box:focus {
+    border-color: #007bff; /* Màu biên khi focus */
+}
+
+.password-container {
+    width: 500px;
+    height: 60px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    border: 3px solid #004168;
+    padding-left: 16px;
+    padding-right: 5px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: border-color 0.3s;
+    box-sizing: border-box; /* Thêm thuộc tính này */
+}
+
+/* Sử dụng pseudo-class :focus-within để áp dụng hiệu ứng khi ô input bên trong có focus */
+.password-container:focus-within {
+    border-color: #007bff;
+}
+
+.password-input {
+    width: 100%;
+    font-size: 20px; 
+    background-color: transparent;
+    margin-right: 10px;
+    border: none;
+    outline: none;
+}
+
+.password-icon {
+    color: #888888;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding-right: 16px;
+}
+
+.password-icon:hover {
+    color: #000000;
+}
+
+.btn-primary {
+    width: 500px; /* Đặt độ rộng */
+    height: 50px; /* Đặt chiều cao */
+    font-size: 20px;
+    font-family: playfair display;
+    font-weight: 700;
+    background-color: #004168; /* Màu nền cho nút */
+    color: white; /* Màu chữ cho nút */
+    border: none; /* Không có biên */
+    border-radius: 10px; /* Bo góc cho nút */
+    cursor: pointer; /* Con trỏ khi hover */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển động khi hover */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+}
+
+
+
+.error-message {
+    color: #ff0000 !important; /* Màu chữ cho thông báo lỗi */
+    font-size: 12px; /* Kích thước chữ cho thông báo lỗi */
+    margin-bottom: 20px !important; /* Khoảng cách dưới thông báo lỗi */
+    margin-top: 20px !important; /* Khoảng cách dưới thông báo lỗi */
+    text-align: start; /* Căn giữa thông báo lỗi */
+}
+
+.login-form .forgot-password {
+    text-align: end; 
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: raleway;
+}
+
+.create-account{
+    text-align: center; 
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 15px;
+    font-family: raleway;
+}
+
+.link-create{
+    padding-left: 8px;
+    font-weight: 800;
+    color: #004168; /* Màu cho link */
+    text-decoration: underline; /* Bỏ gạch chân cho link */
+}
+
+.link {
+    color: #004168; /* Màu cho link */
+    text-decoration: none; /* Bỏ gạch chân cho link */
+}
+
+.link:hover {
+    color: #0056b3; /* Màu khi hover trên link */
+}
+
+.footer {
+    text-align: center; /* Căn giữa cho footer */
+    margin-top: 20px; /* Khoảng cách trên footer */
+}
+
+.login-role-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0; /* Khoảng cách trên dưới */
+}
+
+.login-role-text {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: raleway;
+    color: #004168;
+    margin: 0 65px; /* Khoảng cách giữa text và đường gạch */
+}
+
+.line {
+    flex: 2;
+    height: 2px;
+    background-color: #162f4a;
+}
+
+.btn-role {
+    width: 500px; /* Đặt độ rộng */
+    height: 50px; /* Đặt chiều cao */
+    font-size: 20px;
+    font-family: raleway;
+    font-weight: 700;
+    background-color: transparent; /* Màu nền cho nút */
+    color: #EFD099; /* Màu chữ cho nút */
+    outline: none; /* Không hiển thị đường viền khi focus */
+    transition: border-color 0.3s; /* Hiệu ứng chuyển động khi focus */
+    border: 3px solid #EFD099; /* Biên cho input */
+    border-radius: 10px; /* Bo góc cho nút */
+    cursor: pointer; /* Con trỏ khi hover */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển động khi hover */
+}
+
+.btn-role:hover {
+    background-color: #EFD099; /* Màu nền khi hover */
+    color: #ffffff
+} 
+
+/* Ẩn logo trong chế độ bình thường */
+.logo-container {
+    display: none; /* Ẩn logo mặc định */
+}
+
+
+/* Đăng nhập */
+.signup-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.signup-form {
+    padding-left: 20px;
+    width: 500px;
+}
+
+.signup-form p{
+   font-size: 18px;
+   font-family: raleway;
+   color: #004168;
+   font-weight: 600;
+   margin-bottom: 10px;
+   margin-top: 10px;
+}
+
+.btn-primary-signup {
+    width: 500px; /* Đặt độ rộng */
+    height: 50px; /* Đặt chiều cao */
+    font-size: 20px;
+    font-family: playfair display;
+    font-weight: 700;
+    margin-top: 30px;
+    background-color: #004168; /* Màu nền cho nút */
+    color: white; /* Màu chữ cho nút */
+    border: none; /* Không có biên */
+    border-radius: 10px; /* Bo góc cho nút */
+    cursor: pointer; /* Con trỏ khi hover */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển động khi hover */
+}
+
+.btn-primary-signup:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+}
+
+                                                     /* Responsive */
+
+/* Điều chỉnh cho màn hình nhỏ hơn 768px */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Đổi hướng từ row sang column */
+        max-width: 100%; /* Đặt max-width cho container */
+    }
+
+    .image-container, .image-container-signup {
+        display: none; /* Ẩn ảnh trong màn hình nhỏ */
+    }
+
+    .form-container, .login-form, .signup-form {
+        padding: 20px; /* Giảm padding cho form */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+    }
+
+    .btn-primary, .btn-primary-signup, .btn-role {
+        width: 100%; /* Đặt độ rộng nút theo kích thước của container */
+    }
+
+    .password-container, .input-box {
+        width: 100%; /* Đặt độ rộng input theo kích thước của container */
+    }
+
+    h1 {
+        font-size: 28px; /* Giảm kích thước tiêu đề */
+    }
+
+    .forgot-password, .create-account, .footer {
+        font-size: 12px; /* Giảm kích thước chữ cho các đoạn văn */
+    }
+
+    .login-role-text {
+        margin: 0 30px; /* Giảm khoảng cách giữa text và đường gạch */
+        font-size: 14px;
+    }
+
+    .line {
+        height: 1px; /* Giảm chiều cao của đường gạch */
+    }
+
+    /* Hiển thị logo khi ở chế độ responsive */
+    .logo-container {
+        display: block; /* Hiển thị logo */
+    }
+}
+
+/* Điều chỉnh cho màn hình nhỏ hơn 480px */
+@media (max-width: 480px) {
+    .container {
+        padding: 0; /* Xóa padding container */
+    }
+
+    h1 {
+        font-size: 24px; /* Giảm tiếp kích thước tiêu đề */
+    }
+
+    .forgot-password, .create-account, .footer {
+        font-size: 15px; /* Giảm tiếp kích thước chữ cho các đoạn văn */
+    }
+
+    .btn-primary, .btn-primary-signup, .btn-role {
+        height: 45px; /* Điều chỉnh chiều cao của các nút */
+        font-size: 18px;
+    }
+
+    .input-box, .password-container {
+        height: 50px; /* Điều chỉnh chiều cao của input */
+        font-size: 18px;
+    }
+}
