@@ -3,11 +3,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion'; 
 import { Link, useNavigate } from "react-router-dom";
-import Password from "../../components/Input/Password"; // Giả sử bạn đã tạo component Password
+ import Password from "../../components/Input/Password"; // Giả sử bạn đã tạo component Password
 import { validateEmail } from '../../utils/helper'; // Giả sử bạn đã tạo hàm validateEmail
 // eslint-disable-next-line no-unused-vars
 import loginImage from '../../assets/images/login.jpg'; // Đường dẫn tới ảnh
 import '../../index.css'; // Import file CSS
+import axios from 'axios';
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -30,14 +32,32 @@ const Login = () => {
         setError(""); // Reset lỗi
 
         try {
-            // Logic đăng nhập ở đây
-            navigate('/');
-        // eslint-disable-next-line no-unused-vars
-        } catch (err) {
-            setError("Đăng nhập không thành công, vui lòng kiểm tra lại thông tin");
+            const response = await axios.post('http://localhost:4000/api/user/login', {
+                email,
+                password,
+            });
+        
+            console.log("Response:", response.data); // In ra dữ liệu trả về từ server
+        
+            if (response.data.success) {
+
+                const {  user } = response.data; // Giả sử server trả về role và thông tin người dùng
+
+                if (user.role === "Khách hàng") {
+                    // Lưu thông tin người dùng vào localStorage
+                    localStorage.setItem('user', JSON.stringify(user));
+                    navigate('/'); // Chuyển đến trang chính
+                } else {
+                    setError("Tài khoản không tồn tại");
+                }
+            } else {
+                setError("Đăng nhập thất bại!");
+            }
+        } catch (error) {
+            console.log(error);
+            setError(error.response?.data?.message || "Có lỗi xảy ra, vui lòng thử lại!");
         }
     };
-
     return (
         <div className="login-container">
             <motion.div 

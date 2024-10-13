@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 7003, // Cổng mà ứng dụng sẽ chạy
+   // port: 7003, // Cổng mà ứng dụng sẽ chạy
     open: true, // Mở trình duyệt khi server khởi động
   },
   build: {

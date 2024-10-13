@@ -1,16 +1,33 @@
-const express = require('express');
-const path = require('path'); 
-const userController = require('../controllers/UseControllers'); // Đảm bảo tên file controller chính xác
-const router = express.Router(); // Tạo một router mới
+import express from "express";
+import path from "path";
+import  { login, createUser, addNewAdmin, getAllLeTan,
+          getUserDetails, logoutAdmin, logoutKhachhang,
+          createReceptionist, forgotPassword,resetPassword} from "../controllers/UseControllers.js"; // Đảm bảo đổi đuôi sang .js
+import { isAdminAuthenticated,isPatientAuthenticated } from "../middlewares/auth.js"; 
+const router = express.Router();
+
 
 const routes = (app) => {
-    // Route API cho user
-    router.post('/create',userController.createUser);
+    // Định nghĩa route cho việc tạo người dùng
+    router.post("/createUser", createUser); // Đặt đây để đảm bảo route được thiết lập
+    router.post("/login",login);
+    router.post("/admin/addnew", addNewAdmin);
+    router.get("/LeTan",getAllLeTan);
+    router.get("admin/me",isAdminAuthenticated,getUserDetails);
+    router.get("/khachhang/me",isPatientAuthenticated,getUserDetails);
+    router.get("/admin/logout",isAdminAuthenticated,logoutAdmin);
+    router.get("/khachhang/logout",isPatientAuthenticated,logoutKhachhang);
+    router.post("/letan/addnew",createReceptionist);
 
-    app.use('/api/user', router); // Sử dụng controller để xử lý
+    //test quên mật khẩu
+    router.post("/forgot-password",forgotPassword);
+    router.post("/reset-password/:token",resetPassword);
+
+
+    app.use("/api/user", router); // Sử dụng controller để xử lý
 
     // Định nghĩa đường dẫn đến thư mục build của frontend
-    const frontendSrcPath = path.join(__dirname, '../../frontend/src'); // Đường dẫn đến thư mục src
+    const frontendSrcPath = path.join(process.cwd(), 'frontend/src'); // Thay đổi đường dẫn
 
     // Phân phát các tệp tĩnh từ thư mục src (nếu cần)
     app.use(express.static(frontendSrcPath));
@@ -21,7 +38,4 @@ const routes = (app) => {
     });
 };
 
-// Chỉ định route cho việc tạo người dùng
-// router.post('/create', userController.createUser);
-
-module.exports = routes;
+export default routes; // Sử dụng export mặc định
