@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Password from "../../components/Input/PasswordAdmin"; // Giả sử bạn đã tạo component Password
 // eslint-disable-next-line no-unused-vars
 import { validateEmail } from '../../utils/helper'; // Giả sử bạn đã tạo hàm validateEmail
-import '../../index.css'; // Import file CSS
+import '../../App.css'; // Import file CSS
 import axios from 'axios';
 const LoginAdmin = () => {
    
@@ -30,7 +30,7 @@ const LoginAdmin = () => {
         setError(""); // Reset lỗi
 
         try {
-            const response = await axios.post('http://localhost:4000/api/user/login', {
+            const response = await axios.post('http://localhost:4000/api/user/loginAdmin', {
                 email,
                 password,
             });
@@ -42,7 +42,10 @@ const LoginAdmin = () => {
         
                 // Lưu thông tin người dùng vào localStorage
                 // localStorage.setItem('user', JSON.stringify(user));
-        
+                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("userId", user._id);
+                localStorage.setItem("userName", user.name);
+                localStorage.setItem("role", user.role);
                 // Chuyển hướng dựa trên role
                 if (user.role === "Quản lý") {
                     localStorage.setItem('user', JSON.stringify(user));
@@ -89,7 +92,7 @@ const LoginAdmin = () => {
                         value={password}
                     />
                     {error && <p className='error-message'>{error}</p>}
-                    <p className="forgot-password">
+                    <p className="forgot-password-admin">
                         <Link to="/forgot-password" className="link-admin">Quên mật khẩu</Link>
                     </p>
                     <button type="submit" className="btn-primary-admin"> 
@@ -106,6 +109,9 @@ const LoginAdmin = () => {
                          </Link>
                      </div>
                 </form>
+                <Link to="/" className='backHome-admin'>
+                        Quay về trang chủ &rarr;
+                    </Link>
             </div>
         </div>
     );

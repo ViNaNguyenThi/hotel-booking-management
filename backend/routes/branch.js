@@ -1,16 +1,17 @@
 import express from "express";
-import { createDefaultBranches, addBranch } from "../controllers/BranchControllers.js";
+import { createDefaultBranches, addBranch, updateBranch, deleteBranch, getallBranch } from "../controllers/BranchControllers.js";
 
-const router = express.Router();
+const Branchrouter = express.Router();
 
-// Định nghĩa route cho tạo chi nhánh mặc định
-router.get("/default", createDefaultBranches);
 
-// Route để thêm chi nhánh mới
-router.post("/add", addBranch);
+Branchrouter.get("/default", createDefaultBranches);
+Branchrouter.post("/add", addBranch);
+Branchrouter.put('/updatebranch/:branchId', updateBranch);
+Branchrouter.delete('/deletebranch/:branchId', deleteBranch);
+Branchrouter.get('/getallbranch',getallBranch);
 
-const route = (app) => {
-    app.use('/branch', router); // Tất cả các route liên quan đến chi nhánh sẽ sử dụng '/branch'
+const Branchroute = (app) => {
+    app.use('/branch', Branchrouter); 
 };
 
-export default route;
+export default Branchroute;

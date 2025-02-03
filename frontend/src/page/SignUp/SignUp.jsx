@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'; // Thêm useNavigate
 import { validateEmail } from '../../utils/helper'; // Helper để kiểm tra email hợp lệ
 import Password from "../../components/Input/Password"; // Component nhập mật khẩu
 import axios from 'axios'; // Sử dụng axios để gọi API
-import '../../index.css'
+import '../../App.css'
 
 const SignUp = () => {
   const [name, setName] = useState("");

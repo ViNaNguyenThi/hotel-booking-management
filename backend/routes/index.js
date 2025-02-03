@@ -1,9 +1,14 @@
 import express from "express";
 import path from "path";
 import  { login, createUser, addNewAdmin, getAllLeTan,
-          getUserDetails, logoutAdmin, logoutKhachhang,
-          createReceptionist, forgotPassword,resetPassword} from "../controllers/UseControllers.js"; // Đảm bảo đổi đuôi sang .js
+          getUserDetails, logoutAdmin, logout,
+          createReceptionist, forgotPassword,resetPassword, getCustomerAccounts,
+          getLetanAccount,
+          loginAdmin,
+          updateReceptionist,
+          deleteReceptionist} from "../controllers/UseControllers.js"; // Đảm bảo đổi đuôi sang .js
 import { isAdminAuthenticated,isPatientAuthenticated } from "../middlewares/auth.js"; 
+import {  getProfileAdmin, getUser, updateAdmin, updateUser } from "../controllers/ProfileControllers.js";
 const router = express.Router();
 
 
@@ -11,17 +16,31 @@ const routes = (app) => {
     // Định nghĩa route cho việc tạo người dùng
     router.post("/createUser", createUser); // Đặt đây để đảm bảo route được thiết lập
     router.post("/login",login);
+    router.post("/loginAdmin",loginAdmin);
     router.post("/admin/addnew", addNewAdmin);
     router.get("/LeTan",getAllLeTan);
     router.get("admin/me",isAdminAuthenticated,getUserDetails);
     router.get("/khachhang/me",isPatientAuthenticated,getUserDetails);
-    router.get("/admin/logout",isAdminAuthenticated,logoutAdmin);
-    router.get("/khachhang/logout",isPatientAuthenticated,logoutKhachhang);
+    router.post("/admin/logout",logoutAdmin);
+    router.post("/khachhang/logout",logout);
     router.post("/letan/addnew",createReceptionist);
+    router.put("/updateReceptionist/:id",updateReceptionist);
+    router.delete("/deleteReceptionist/:id",deleteReceptionist);
+    
+
+    router.get("/account/khachhang",getCustomerAccounts);
+    router.get("/account/letan",getLetanAccount);
 
     //test quên mật khẩu
     router.post("/forgot-password",forgotPassword);
     router.post("/reset-password/:token",resetPassword);
+
+
+    //test thông tin cá nhân
+    router.get("/profileuser/:id",getUser);
+    router.put("/updateprofile/:id",updateUser);
+    router.get("/profileAdmin/:id",getProfileAdmin);
+    router.put("/updateprofileAdmin/:id",updateAdmin);
 
 
     app.use("/api/user", router); // Sử dụng controller để xử lý

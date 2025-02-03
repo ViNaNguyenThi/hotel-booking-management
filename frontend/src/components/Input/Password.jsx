@@ -18,6 +18,7 @@ const Password = ({ value, onChange, placeholder }) => {
                 type={isShowPassword ? "text" : "password"}
                 // placeholder={placeholder || "Password"}
                 className='password-input'
+                maxLength={25}
             />
             {isShowPassword ? (
                 <FaEye

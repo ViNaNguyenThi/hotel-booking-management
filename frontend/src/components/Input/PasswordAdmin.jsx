@@ -18,6 +18,7 @@ const PasswordAdmin = ({ value, onChange, placeholder }) => {
                 type={isShowPassword ? "text" : "password"}
                 // placeholder={placeholder || "Password"}
                 className='password-input-admin'
+                maxLength={20}
             />
             {isShowPassword ? (
                 <FaEye
