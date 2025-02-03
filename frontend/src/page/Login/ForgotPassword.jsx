@@ -6,6 +6,8 @@ import Input from "../../components/Input.jsx";
 import { ArrowLeft, Loader, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import '../../App.css'
+
 const API_URL = "http://localhost:4000/api/user"; // dòng này là dòng dắt tới api
 
 const ForgotPassword = () => {
@@ -36,64 +38,89 @@ const ForgotPassword = () => {
 	};
 
 	return (
-		<motion.div
-			initial={{ opacity: 0, y: 20 }}
-			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.5 }}
-			className='max-w-md w-full bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden'
-		>
-			<div className='p-8'>
-				<h2 className='text-3xl font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-emerald-500 text-transparent bg-clip-text'>
+		<div className="forgot-container">
+			<motion.div
+				initial={{ x: -100 }} // Vị trí bắt đầu
+				animate={{ x: 0 }} // Vị trí kết thúc
+				exit={{ x: -100 }} // Vị trí ra khỏi
+				transition={{ duration: 0.5 }} // Thời gian chuyển động
+				className='image-container-forgot'
+			>
+			</motion.div>
+			<div className='forgot-form'>
+				{/* <h2 className='forgot-title'>
 					Forgot Password
-				</h2>
+				</h2> */}
 
 				{!isSubmitted ? (
 					<form onSubmit={handleSubmit}>
-						<p className='text-gray-300 mb-6 text-center'>
-							Enter your email address and we will send you a link to reset your password.
-						</p>
-						<Input
-							icon={Mail}
+						<h1>QUÊN MẬT KHẨU</h1>
+						<p>Vui lòng nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu.</p>
+
+						<div className="input-icon-container">
+							<Mail className="input-icon" />
+							<input
+								type='email'
+								placeholder='Địa chỉ Email'
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								required
+								className="input-box-with-icon"
+							/>
+						</div>
+
+						{/* <input
 							type='email'
-							placeholder='Email Address'
+							placeholder='Địa chỉ Email'
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							required
-						/>
-						<motion.button
+							className="input-box"
+						/> */}
+						{/* <motion.button
 							whileHover={{ scale: 1.02 }}
 							whileTap={{ scale: 0.98 }}
 							className='w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200'
 							type='submit'
 						>
 							{isLoading ? <Loader className='size-6 animate-spin mx-auto' /> : "Send Reset Link"}
-						</motion.button>
+						</motion.button> */}
+
+
+						<button type="submit" className="btn-primary-forgot">
+							{isLoading ? <Loader className='size-6 animate-spin mx-auto' /> : "Gửi liên kết đặt lại mật khẩu"}
+						</button>
 
 						{error && <p className='text-red-500 mt-4 text-center'>{error}</p>}
 					</form>
 				) : (
 					<div className='text-center'>
-						<motion.div
+						{/* <motion.div
 							initial={{ scale: 0 }}
 							animate={{ scale: 1 }}
 							transition={{ type: "spring", stiffness: 500, damping: 30 }}
 							className='w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4'
 						>
 							<Mail className='h-8 w-8 text-white' />
-						</motion.div>
-						<p className='text-gray-300 mb-6'>
-							{message ? message : `If an account exists for ${email}, you will receive a password reset link shortly.`}
+						</motion.div> */}
+						<h1>Hãy kiểm tra hộp thư thoại email của bạn</h1>
+						<p>
+							{message ? message : `Nếu tài khoản tồn tại cho ${email}, bạn sẽ nhận được liên kết đặt lại mật khẩu trong thời gian sớm nhất.`}
 						</p>
 					</div>
 				)}
+				<Link to="/login" className='backHome'>
+					&larr; Quay về trang đăng nhập
+				</Link>
 			</div>
 
-			<div className='px-8 py-4 bg-gray-900 bg-opacity-50 flex justify-center'>
+			{/* <div className='px-8 py-4 bg-gray-900 bg-opacity-50 flex justify-center'>
 				<Link to={"/login"} className='text-sm text-green-400 hover:underline flex items-center'>
 					<ArrowLeft className='h-4 w-4 mr-2' /> Back to Login
 				</Link>
-			</div>
-		</motion.div>
+			</div> */}
+
+		</div>
 	);
 };
 export default ForgotPassword;

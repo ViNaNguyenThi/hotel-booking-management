@@ -25,7 +25,8 @@ export const createDefaultBranches = async (req, res) => {
       res.status(500).json({ message: 'Lỗi khi tạo chi nhánh.', error });
     }
   };
-  
+
+  //Thêm chi nhánh
 export const addBranch = async (req, res) => {
     const { branchname, branchlocation } = req.body;
     console.log('Received data:', req.body);
@@ -50,8 +51,60 @@ export const addBranch = async (req, res) => {
     }
   };
 
-// Xuất các phương thức của controller
-// module.exports = {
-//   createDefaultBranches,
-//   // Các phương thức khác cho Branch có thể được thêm vào đây
-// };
+  //Sửa thông tin chi nhánh
+  export const updateBranch = async (req, res) => {
+    const { branchId } = req.params; 
+    const { branchname, branchlocation } = req.body; 
+  
+    try {
+    
+      const branch = await Branch.findById(branchId);
+      if (!branch) {
+        return res.status(404).json({ message: 'Chi nhánh không tồn tại.' });
+      }
+  
+    
+      if (branchname) branch.branchname = branchname;
+      if (branchlocation) branch.branchlocation = branchlocation;
+  
+      const updatedBranch = await branch.save(); 
+      res.status(200).json({ message: 'Chi nhánh đã được cập nhật thành công.', branch: updatedBranch });
+    } catch (error) {
+      console.error('Lỗi khi cập nhật chi nhánh:', error);
+      res.status(500).json({ message: 'Lỗi khi cập nhật chi nhánh.', error });
+    }
+  };
+
+  //Xóa chi nhánh
+  export const deleteBranch = async (req, res) => {
+    const { branchId } = req.params; 
+  
+    try {
+     
+      const deletedBranch = await Branch.findByIdAndDelete(branchId);
+      if (!deletedBranch) {
+        return res.status(404).json({ message: 'Chi nhánh không tồn tại.' });
+      }
+      
+      res.status(200).json({ message: 'Chi nhánh đã được xóa thành công.', branch: deletedBranch });
+    } catch (error) {
+      console.error('Lỗi khi xóa chi nhánh:', error);
+      res.status(500).json({ message: 'Lỗi khi xóa chi nhánh.', error });
+    }
+  };
+
+
+
+  //Lấy danh sách chi nhánh 
+  export const getallBranch = async (req, res) => {
+    try {
+      
+        const allBranch = await Branch.find();
+
+        res.status(200).json(allBranch);
+    } catch (error) {
+        console.error('Lỗi khi lấy tất cả chi nhánh khách sạn:', error);
+        res.status(500).json({ message: 'Lỗi khi lấy tất cả chi nhánh khách sạn.', error });
+    }
+};
+  

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import validator from 'validator';
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const Schema = mongoose.Schema;
@@ -42,6 +42,15 @@ const userSchema = new Schema({
         required: [true, "User Role Required!"],
         enum: ["Lễ tân", "Quản lý", "Khách hàng"],
     },
+    birthday: {
+        type: Date,
+        required: [false, "Birthday Is Required!"],
+    },
+    gender: {
+        type: String,
+        required: [false, "Gender Is Required!"],
+        enum: ["Nam", "Nữ"],
+    },
     resetPasswordToken: String,
 	resetPasswordExpiresAt: Date,
     createdOn: { type: Date, default: new Date().getTime() },
@@ -61,12 +70,12 @@ userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
         return next();
     }
-    this.password = await bcrypt.hash(this.password, 10);
+    this.password = await bcryptjs.hash(this.password, 10);
 });
 
 // Phương thức so sánh password
 userSchema.methods.comparePassword = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.password);
+    return await bcryptjs.compare(enteredPassword, this.password);
 };
 
 // Xuất module
