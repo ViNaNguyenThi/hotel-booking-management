@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,9 +13,11 @@ import { useTranslation } from "react-i18next";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// eslint-disable-next-line react/prop-types
 const SearchBar = ({ onSearch }) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("datPhong");
+  // eslint-disable-next-line no-unused-vars
   const { searchResults, setSearchResults, setIsSearchExecuted, setSearchId } = useContext(SearchContext);
 
   const [selectedBranch, setSelectedBranch] = useState("");
@@ -76,7 +79,8 @@ const SearchBar = ({ onSearch }) => {
     } catch (error) {
       if (error.response) {
         console.error("Lỗi từ server:", error.response.data);
-        toast.error(`Lỗi từ server: ${error.response.data}`);
+       // toast.error(`Lỗi từ server: ${error.response.data}`);
+       toast.error("Lỗi từ server:");
       } else {
         console.error("Lỗi khi tìm kiếm phòng:", error);
         toast.error("Đã xảy ra lỗi khi tìm kiếm phòng.");
