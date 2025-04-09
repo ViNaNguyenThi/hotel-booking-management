@@ -300,7 +300,7 @@ const Booking = () => {
         setShowAnimation(true); // Hiển thị hoạt ảnh thành công
         setTimeout(() => {
           navigate("/roomlist");
-        }, 7000);
+        }, 10000);
 
 
         // Hiển thị thông báo thành công
@@ -308,7 +308,7 @@ const Booking = () => {
           title: "Đặt phòng thành công!",
           icon: "success",
           confirmButtonText: "OK",
-          timer: 7000,
+          timer: 10000,
         });
       } else {
         // Hiển thị thông báo thất bại
@@ -316,7 +316,7 @@ const Booking = () => {
           title: "Đặt phòng thất bại!",
           icon: "error",
           confirmButtonText: "OK",
-          timer: 7000,
+          timer: 10000,
           preConfirm: () => {
             navigate("/roomlist"); // Chuyển hướng tới trang /roomlist
           },

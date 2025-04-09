@@ -61,7 +61,7 @@ const SignUp = () => {
         setSuccess("Đăng ký thành công!"); // Hiển thị thông báo
         setTimeout(() => {
           navigate('/login'); // Chuyển sang trang đăng nhập sau khi thành công
-        }, 2000); // Đợi 2 giây trước khi chuyển trang
+         }, 2000); // Đợi 2 giây trước khi chuyển trang
       } else {
         setError("Đăng ký thất bại!");
       }

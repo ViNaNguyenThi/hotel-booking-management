@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect } from 'react';
 import HotelMarker from '../../assets/Icons/location_marker.png';
 import './Map.css'

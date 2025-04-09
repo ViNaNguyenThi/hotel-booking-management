@@ -108,18 +108,18 @@ const RoomManager = () => {
 
 
 
-    // Xóa phòng
-    // const deleteRoom = async (idroom) => {
-    //     const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa phòng này?");
-    //     if (confirmDelete) {
-    //         try {
-    //             await axios.delete(`http://localhost:4000/room/deleteroom/${idroom}`);
-    //             setRooms(rooms.filter((room) => room._id !== idroom));
-    //         } catch (err) {
-    //             setError(err.message);
-    //         }
-    //     }
-    // };
+   // Xóa phòng
+    const deleteRoom = async (idroom) => {
+        const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa phòng này?");
+        if (confirmDelete) {
+            try {
+                await axios.delete(`http://localhost:4000/room/deleteroom/${idroom}`);
+                setRooms(rooms.filter((room) => room._id !== idroom));
+            } catch (err) {
+                setError(err.message);
+            }
+        }
+    };
 
 
 
@@ -162,9 +162,57 @@ const RoomManager = () => {
 
 
     const handleSave = () => {
+        const { NumberofRoom, NameRoom, Describe, IDBranch, IDRoomType, acreage } = currentRoom;
+        
+        if (!NumberofRoom) {
+            toast.error("Không được để trống số phòng!");
+            return;
+        }
+        if (NumberofRoom.length > 4) {
+            toast.error("Số phòng không được vượt quá 4 ký tự!");
+            return;
+        }
+        const specialCharRegex = /[^a-zA-Z0-9]/;
+        if (specialCharRegex.test(NumberofRoom)) {
+            toast.error("Số phòng chỉ được chứa chữ và số, không được chứa ký tự đặc biệt, không chứa khoảng cách!");
+            return;
+        }
+        if (rooms.some(room => room.NumberofRoom === NumberofRoom && room._id !== currentRoom._id)) {
+            toast.error("Số phòng này đã tồn tại!");
+            return;
+        }
+        if (!NameRoom) {
+            toast.error("Không được để trống tên phòng!");
+            return;
+        }
+        if (rooms.some(room => room.NameRoom.toLowerCase() === NameRoom.toLowerCase() && room._id !== currentRoom._id)) {
+            toast.error("Tên phòng này đã tồn tại!");
+            return;
+        }
+        if (!Describe) {
+            toast.error("Không được để trống mô tả!");
+            return;
+        }
+        if (!acreage) {
+            toast.error("Không được để trống diện tích!");
+            return;
+        }
+        if (!IDBranch) {
+            toast.error("Vui lòng chọn chi nhánh!");
+            return;
+        }
+        if (!IDRoomType) {
+            toast.error("Vui lòng chọn loại phòng!");
+            return;
+        }
+        if (images.length === 0 && !isEditing) {
+            toast.error("Bạn chưa tải ảnh lên!");
+            return;
+        }
+        
         isEditing ? editRoom() : addRoom();
     };
-
+    
 
     const resetForm = () => {
         setCurrentRoom({});
@@ -222,7 +270,7 @@ const RoomManager = () => {
                         value={currentRoom.NumberofRoom || ''}
                         onChange={(e) => setCurrentRoom({ ...currentRoom, NumberofRoom: e.target.value })}
                         className="modal-input"
-                        maxLength={4}
+                        // maxLength={4}
                     />
                     <label className='label-text'>Tên phòng</label>
                     <input
@@ -348,9 +396,9 @@ const RoomManager = () => {
                                         <button onClick={() => { setCurrentRoom(room); setIsEditing(true); openModal();openEditModal(room) }}>
                                             <FaEdit className="icon-edit-delete" /> {/* Edit icon */}
                                         </button>
-                                        {/* <button onClick={() => deleteRoom(room._id)}>
+                                        <button onClick={() => deleteRoom(room._id)}>
                                             <FaTrash className="icon-edit-delete" /> 
-                                        </button> */}
+                                        </button>
                                     </div>
                                 </td>
                             </tr>

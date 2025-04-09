@@ -289,12 +289,12 @@ export const updateBookingStatus = async (req, res) => {
         // Gửi email thông báo
         let subject, message;
         const checkInDate = new Date(booking.CheckInDate); // Chuyển đổi sang đối tượng Date
-        const formattedDate = checkInDate.toLocaleDateString('vi-VN', {
+        const formattedDate = checkInDate.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
         });
-        const formattedTime = checkInDate.toLocaleTimeString('vi-VN', {
+        const formattedTime = checkInDate.toLocaleTimeString('en-US', {
             hour: '2-digit',
             minute: '2-digit',
         });
@@ -433,6 +433,8 @@ export const checkoutBooking = async (req, res) => {
         res.status(500).json({ message: 'Đã xảy ra lỗi khi checkout.' });
     }
 };
+
+
 export const getRoomEquipmentServiceStatsAPI = async (req, res) => {
     const { branchId, month, year } = req.params;
 

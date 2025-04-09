@@ -86,7 +86,7 @@ const BookingDetails = () => {
                 }
 
                 // Chuyển hướng về trang đặt phòng
-                setTimeout(() => navigate('/homeadmin'), 1000);
+                setTimeout(() => navigate('/homeadmin'), 5000);
             } else {
                 console.error('Lỗi khi cập nhật trạng thái đặt phòng');
                 toast.error("Cập nhật trạng thái không thành công.");

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +10,8 @@ import NavbarAdmin from '../../../components/Navbar/NavbarAdmin';
 import Account from '../../../components/Account/Account';
 
 import './UserManager.css'
+
+
 
 const AccountManagement = () => {
     const navigate = useNavigate();
@@ -81,6 +84,46 @@ const AccountManagement = () => {
     };
 
     const handleCreateAccount = async () => {
+        if (!newAccount.name) {
+            alert("Vui lòng nhập tên người dùng!");
+            return;
+        }
+        if (!newAccount.email) {
+            alert("Vui lòng nhập email!");
+            return;
+        }
+        if (!newAccount.phone) {
+            alert("Vui lòng nhập số điện thoại!");
+            return;
+        }
+        if (!newAccount.password) {
+            alert("Vui lòng nhập mật khẩu!");
+            return;
+        }
+        if (newAccount.password.length < 8) {
+            alert("Mật khẩu phải có ít nhất 8 ký tự!");
+            return;
+        }
+        if (newAccount.name.length < 3) {
+            alert("Tên người dùng phải có ít nhất 3 ký tự!");
+            return;
+        }
+        if (!newAccount.email.includes("@gmail.com")) {
+            alert("Email không đúng định dạng!");
+            return;
+        }
+        if (newAccount.phone.length !== 10) {
+            alert("Số điện thoại phải có đúng 10 ký tự!");
+            return;
+          
+        }
+        
+        const phoneRegex = /^[0-9]{10}$/; // Chỉ chứa 10 số, không có chữ hoặc khoảng cách
+        if (!phoneRegex.test(newAccount.phone)) {
+            alert("Số điện thoại phải có đúng 10 ký tự không được chứa ký tự chữ, khoảng cách!");
+            return;
+          
+        }
         try {
             const endpoint = activeRole === "Khách hàng"
                 ? "http://localhost:4000/api/user/createUser"
@@ -89,6 +132,7 @@ const AccountManagement = () => {
             fetchAccounts();
             resetNewAccount();
             setIsModalOpen(false);
+           
         } catch (error) {
             console.error("Error creating account:", error);
         }
@@ -107,6 +151,18 @@ const AccountManagement = () => {
     };
 
     const handleUpdateAccount = async () => {
+        if (!newAccount.name) {
+            alert("Vui lòng nhập tên người dùng!");
+            return;
+        }
+        if (!newAccount.email) {
+            alert("Vui lòng nhập email!");
+            return;
+        }
+        if (!newAccount.phone) {
+            alert("Vui lòng nhập số điện thoại!");
+            return;
+        }
         try {
             await axios.put(`http://localhost:4000/api/user/updateReceptionist/${accountToEdit._id}`, newAccount);
             fetchAccounts();
