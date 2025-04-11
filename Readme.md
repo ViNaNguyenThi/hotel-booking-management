@@ -29,6 +29,8 @@ The system also provides an admin dashboard to oversee all activities — from t
 
 ## 📷 Screenshots
 
+**Home Screen** 
+
 ## 📞 Contact
 - 📧 Email: nguyenthivina0511@gmail.com 
   
