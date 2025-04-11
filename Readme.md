@@ -89,5 +89,6 @@ The system also provides an admin dashboard to oversee all activities — from t
 ## 📞 Contact
 - 📧 Email: nguyenthivina0511@gmail.com 
 - **GitHub Issues:** [Report a Bug](https://github.com/ViNaNguyenThi/hotel-booking-management/issues)
+  
 📌 **Note:** Want to contribute? Feel free to open a **Pull Request** — your ideas are always welcome! 🚀
 
